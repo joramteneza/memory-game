@@ -4,7 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Heart, Star, Sun, Moon, Cloud, Flower2, TypeIcon as type, LucideIcon } from 'lucide-react'
+import { Heart, Star, Sun, Moon, Cloud, Flower2, LucideIcon } from 'lucide-react'
 import { toast } from "sonner"
 
 type MemoryCard = {
