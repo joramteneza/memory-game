@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String        @id @default(auto())  @map("_id") @db.ObjectId
+  username    String        @unique
+  password    String
+  scores      Score[]
+  createdAt   DateTime      @default(now())
+  GameHistory GameHistory[]
+}
+
+model Score {
+  id          String   @id @default(auto())  @map("_id") @db.ObjectId
+  user        User?    @relation(fields: [userId], references: [id])
+  userId      String?  @db.ObjectId
+  anonymousId String?
+  score       Int
+  createdAt   DateTime @default(now())
+
+  @@index([score])
+}
+
+model GameHistory {
+  id        String   @id @default(auto())  @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  score     Int
+  gameMode  String   @default("easy")
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
